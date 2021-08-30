@@ -10,7 +10,7 @@ namespace ToolGood.TextFilter.Api.Datas.Texts
     public class TextFilterContactItem
     {
         /// <summary>
-        /// 联系方式类型 0)手机号  1)qq号  2)微信号  3) 微博号  4)微信号公众号   
+        /// 联系方式类型 1) 账号，2）邮箱，3）网址，4）手机号， 5) QQ号, 6) 微信号, 7) Q群号
         /// </summary>
         [JsonProperty("contactType", NullValueHandling = NullValueHandling.Ignore)]
         public string ContactType { get; set; }
