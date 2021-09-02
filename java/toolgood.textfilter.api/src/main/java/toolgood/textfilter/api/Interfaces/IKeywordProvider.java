@@ -27,7 +27,7 @@ public interface IKeywordProvider {
     CommonResult AddKeyword(String text, int type, String comment);
 
     /**
-     * 添加自定义敏感词
+     * 编辑自定义敏感词
      * 
      * @param id      敏感词ID
      * @param text    敏感词
