@@ -36,13 +36,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <Protobuf Include="Protos\imageClassify.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\imageFilter.proto" GrpcServices="Client" />
-    <Protobuf Include="Protos\textFilter.proto" GrpcServices="Client" />
+    <Protobuf Include="..\..\Protos\imageClassify.proto" GrpcServices="Client" />
+    <Protobuf Include="..\..\Protos\imageFilter.proto" GrpcServices="Client" />
+    <Protobuf Include="..\..\Protos\textFilter.proto" GrpcServices="Client" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Protos\textFilter.proto" />
-  </ItemGroup>
+ 
 
 
   <ItemGroup>
