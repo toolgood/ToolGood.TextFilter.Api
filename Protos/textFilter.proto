@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "ToolGood.TextFilter"; 
 
-package textfilter;
+package toolgood.textfilter.api.GrpcBase;
 
 // The greeting service definition.
 service TextFilterGrpc {
@@ -57,13 +57,13 @@ message TextReplaceAsyncGrpcRequest {
   string url = 8;
 }
 message TextFilterRequestIdGrpcReply {
-  int32 code = 1;// ï¿½ï¿½ï¿½ï¿½ï¿½ë£º0) ï¿½É¹ï¿½ï¿½ï¿½1) Ê§ï¿½ï¿½
+  int32 code = 1;// ·µ»ØÂë£º0) ³É¹¦£¬1) Ê§°Ü
   string message = 2;
   string requestId = 3;
 }
 
 message TextFindAllGrpcReply {
-  int32 code = 1;// ï¿½ï¿½ï¿½ï¿½ï¿½ë£º0) ï¿½É¹ï¿½ï¿½ï¿½1) Ê§ï¿½ï¿½
+  int32 code = 1;// ·µ»ØÂë£º0) ³É¹¦£¬1) Ê§°Ü
   string message = 2;
   string requestId = 3;
   string riskLevel = 4;  
@@ -74,7 +74,7 @@ message TextFindAllGrpcReply {
 }
 
 message TextReplaceGrpcReply{
-  int32 code = 1;// ï¿½ï¿½ï¿½ï¿½ï¿½ë£º0) ï¿½É¹ï¿½ï¿½ï¿½1) Ê§ï¿½ï¿½
+  int32 code = 1;// ·µ»ØÂë£º0) ³É¹¦£¬1) Ê§°Ü
   string message = 2;
   string requestId = 3;
   string riskLevel = 4;  

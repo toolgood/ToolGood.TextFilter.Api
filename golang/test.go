@@ -9,6 +9,9 @@ import (
 
 func main() {
 	test_TextFilterProvider()
+
+	test_TextFilterGrpcClient()
+
 	test_GetServiceUrls_Http()
 	test_GetServiceUrls_Grpc()
 }
@@ -37,6 +40,19 @@ func test_TextFilterProvider() {
 	result = provider.MarkdownFilter(request)
 	if result.RiskLevel != "REJECT" {
 		fmt.Println("HtmlFilter is Error.")
+	}
+}
+
+func test_TextFilterGrpcClient() {
+	fmt.Println("test_TextFilterGrpcClient is Start.")
+	config := NewTextFilterConfig()
+	provider := config.CreateTextFilterGrpcClient()
+	request := NewTextFilterRequest()
+	request.Txt = "你妈的"
+
+	result := provider.TextFilter(request)
+	if result.RiskLevel != "REJECT" {
+		fmt.Println("TextFilter is Error.")
 	}
 }
 

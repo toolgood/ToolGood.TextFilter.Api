@@ -46,14 +46,14 @@ func (this *TextFilterConfig) SetConsulAddress(host string) {
 	this.consulAddress = host
 }
 
-func (this *TextFilterConfig) CreateImageFilterAsyncProvider() *ImageFilterAsyncProvider {
-	provider := NewImageFilterAsyncProvider(this.textFilterHost)
-	return provider
-}
-func (this *TextFilterConfig) CreateImageFilterProvider() *ImageFilterProvider {
-	provider := NewImageFilterProvider(this.textFilterHost)
-	return provider
-}
+// func (this *TextFilterConfig) CreateImageFilterAsyncProvider() *ImageFilterAsyncProvider {
+// 	provider := NewImageFilterAsyncProvider(this.textFilterHost)
+// 	return provider
+// }
+// func (this *TextFilterConfig) CreateImageFilterProvider() *ImageFilterProvider {
+// 	provider := NewImageFilterProvider(this.textFilterHost)
+// 	return provider
+// }
 func (this *TextFilterConfig) CreateKeywordProvider() *KeywordProvider {
 	provider := NewKeywordProvider(this.textFilterHost)
 	return provider
@@ -76,6 +76,10 @@ func (this *TextFilterConfig) CreateTextFilterProvider() *TextFilterProvider {
 }
 func (this *TextFilterConfig) CreateTextFilterGrpcClient() *TextFilterGrpcProvider {
 	provider := NewTextFilterGrpcProvider(this.grpcHost)
+	return provider
+}
+func (this *TextFilterConfig) CreateTextFilterGrpcAnsycClient() *TextFilterGrpcAsyncProvider {
+	provider := NewTextFilterGrpcAsyncProvider(this.grpcHost)
 	return provider
 }
 

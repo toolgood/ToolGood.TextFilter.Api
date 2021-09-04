@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option csharp_namespace = "ToolGood.TextFilter";
 
-package imageFilter;
+package toolgood.textfilter.api.GrpcBase;
 
 // The greeting service definition.
 service ImageClassifyGrpc {

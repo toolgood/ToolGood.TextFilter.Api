@@ -38,6 +38,9 @@ public class ImageFilterAsyncProvider extends ProviderBase implements IImageFilt
 
     @Override
     public CommonResult ImageUploadFilter(String path, String url, String requestId) {
+        // String u = ImageUploadFilterUrl + "?url=" + URLEncoder.encode(url, "GBK") +
+        // "&requestId="
+        // + URLEncoder.encode(requestId, "GBK");
         Map<String, Object> dictionary = new Hashtable<String, Object>();
         dictionary.put("path", path);
         dictionary.put("url", url);
@@ -77,10 +80,12 @@ public class ImageFilterAsyncProvider extends ProviderBase implements IImageFilt
 
     @Override
     public CommonResult BrowserFilter(float[] vals, String url, String requestId) {
+
         Map<String, Object> dictionary = new Hashtable<String, Object>();
         dictionary.put("Params", vals);
         dictionary.put("url", url);
         dictionary.put("requestId", requestId);
+
         String content = doPost(BrowserClassifyUrl, dictionary);
 
         Gson gson = new GsonBuilder().create();
