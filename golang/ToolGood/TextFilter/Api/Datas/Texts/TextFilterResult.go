@@ -1,14 +1,13 @@
 package Texts
 
- 
-          
-type TextFilterResult struct{
-	Code int     
-	Message string
-	RequestId string
-	RiskLevel string
+type TextFilterResult struct {
+	Code           int32
+	Message        string
+	RequestId      string
+	RiskLevel      string
+	RiskCode       string
 	SentimentScore float32
 
-	Details []TextFilterDetailItem
+	Details  []TextFilterDetailItem
 	Contacts []TextFilterContactItem
 }

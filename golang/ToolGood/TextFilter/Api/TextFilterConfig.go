@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"./ConsulDiscovery"
+	. "./Grpcs"
 	. "./Impl"
 )
 
@@ -16,7 +17,7 @@ type TextFilterConfig struct {
 func NewTextFilterConfig() *TextFilterConfig {
 	result := &TextFilterConfig{}
 	result.textFilterHost = "http://localhost:9191"
-	result.grpcHost = "http://localhost:9192"
+	result.grpcHost = "localhost:9192"
 	result.consulAddress = "http://localhost:8500"
 
 	return result
@@ -73,6 +74,10 @@ func (this *TextFilterConfig) CreateTextFilterProvider() *TextFilterProvider {
 	provider := NewTextFilterProvider(this.textFilterHost)
 	return provider
 }
+func (this *TextFilterConfig) CreateTextFilterGrpcClient() *TextFilterGrpcProvider {
+	provider := NewTextFilterGrpcProvider(this.grpcHost)
+	return provider
+}
 
 func (this *TextFilterConfig) GetServiceUrls_Http() []string {
 	service, _ := ConsulDiscovery.NewConsulServiceRegistry(this.consulAddress)
@@ -89,7 +94,7 @@ func (this *TextFilterConfig) GetServiceUrls_Grpc() []string {
 	rs, _ := service.GetInstances("ToolGood.TextFilter.Grpc")
 	result := make([]string, len(rs))
 	for index, sever := range rs {
-		result[index] = "http://" + sever.Host + ":" + strconv.Itoa(sever.Port)
+		result[index] = sever.Host + ":" + strconv.Itoa(sever.Port)
 	}
 	return result
 }
