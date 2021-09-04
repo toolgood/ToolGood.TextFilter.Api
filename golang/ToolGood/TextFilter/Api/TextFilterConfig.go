@@ -1,45 +1,49 @@
 package Api
 
-import . "./Impl"
+import (
+	"strconv"
+
+	"./ConsulDiscovery"
+	. "./Impl"
+)
 
 type TextFilterConfig struct {
-	textFilterHost string 
+	textFilterHost string
 	grpcHost       string
 	consulAddress  string
-} 
-
+}
 
 func NewTextFilterConfig() *TextFilterConfig {
-	result  := &TextFilterConfig{}
-	result.textFilterHost  =  "http://localhost:9191"
-	result.grpcHost  =  "http://localhost:9192"
-	result.consulAddress  =  "http://localhost:8500"
+	result := &TextFilterConfig{}
+	result.textFilterHost = "http://localhost:9191"
+	result.grpcHost = "http://localhost:9192"
+	result.consulAddress = "http://localhost:8500"
 
 	return result
 }
 
-func (this *TextFilterConfig)  GetTextFilterHost() string {
+func (this *TextFilterConfig) GetTextFilterHost() string {
 	return this.textFilterHost
 }
 
-func (this *TextFilterConfig)SetTextFilterHost(host string) {
-	this.textFilterHost   = host
+func (this *TextFilterConfig) SetTextFilterHost(host string) {
+	this.textFilterHost = host
 }
-func (this *TextFilterConfig) GetGrpcHostt() string {
-	return this.grpcHost 
+func (this *TextFilterConfig) GetGrpcHost() string {
+	return this.grpcHost
 }
 
-func (this *TextFilterConfig) SetGrpcHostt(host string) {
-	this.grpcHost = host 
-}  
+func (this *TextFilterConfig) SetGrpcHost(host string) {
+	this.grpcHost = host
+}
 
 func (this *TextFilterConfig) GetConsulAddress() string {
-	return this.consulAddress 
+	return this.consulAddress
 }
 
 func (this *TextFilterConfig) SetConsulAddress(host string) {
-	this.consulAddress = host 
-}  
+	this.consulAddress = host
+}
 
 func (this *TextFilterConfig) CreateImageFilterAsyncProvider() *ImageFilterAsyncProvider {
 	provider := NewImageFilterAsyncProvider(this.textFilterHost)
@@ -68,4 +72,24 @@ func (this *TextFilterConfig) CreateTextFilterAsyncProvider() *TextFilterAsyncPr
 func (this *TextFilterConfig) CreateTextFilterProvider() *TextFilterProvider {
 	provider := NewTextFilterProvider(this.textFilterHost)
 	return provider
+}
+
+func (this *TextFilterConfig) GetServiceUrls_Http() []string {
+	service, _ := ConsulDiscovery.NewConsulServiceRegistry(this.consulAddress)
+	rs, _ := service.GetInstances("ToolGood.TextFilter")
+	result := make([]string, len(rs))
+	for index, sever := range rs {
+		result[index] = "http://" + sever.Host + ":" + strconv.Itoa(sever.Port)
+	}
+
+	return result
+}
+func (this *TextFilterConfig) GetServiceUrls_Grpc() []string {
+	service, _ := ConsulDiscovery.NewConsulServiceRegistry(this.consulAddress)
+	rs, _ := service.GetInstances("ToolGood.TextFilter.Grpc")
+	result := make([]string, len(rs))
+	for index, sever := range rs {
+		result[index] = "http://" + sever.Host + ":" + strconv.Itoa(sever.Port)
+	}
+	return result
 }
